@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/sign-in">
       <html lang="zh-CN" suppressHydrationWarning>
         <body className="antialiased">
           <ThemeProvider>{children}</ThemeProvider>
