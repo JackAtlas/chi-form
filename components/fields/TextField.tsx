@@ -27,7 +27,7 @@ export const TextFieldFormElement: FormElement = {
   }),
   designerBtnElement: {
     icon: TypeIcon,
-    label: 'Text Field'
+    label: '文本框'
   },
   designerComponent: DesignerComponent,
   formComponent: () => <div>TextField Form</div>,
