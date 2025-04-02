@@ -18,7 +18,11 @@ export default function RootLayout({
     <ClerkProvider afterSignOutUrl="/sign-in">
       <html lang="zh-CN" suppressHydrationWarning>
         <body className="antialiased">
-          <ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
             {children}
             <Toaster />
           </ThemeProvider>
