@@ -63,6 +63,7 @@ function FormSubmitComponent({
       await SubmitForm(formUrl, JsonContent)
       setSubmitted(true)
     } catch (error) {
+      console.error(error)
       toast.error('出错了')
     }
   }

@@ -1,4 +1,4 @@
-import React, { use, useTransition } from 'react'
+import React, { useTransition } from 'react'
 import { Button } from './ui/button'
 import { ArrowUpToLineIcon, Loader2Icon } from 'lucide-react'
 import {
@@ -26,6 +26,7 @@ function PublishFormBtn({ id }: { id: number }) {
       toast.success('表单发布成功,现已对外公开')
       router.refresh()
     } catch (error) {
+      console.log(error)
       toast.error('表单发布失败，请稍后刷新再试')
     }
   }

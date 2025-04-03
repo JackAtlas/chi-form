@@ -45,6 +45,7 @@ function CreateFormBtn() {
       toast.success('表单创建成功')
       router.push(`/builder/${formId}`)
     } catch (error) {
+      console.error(error)
       toast.error('表单创建失败，请稍后再试')
     }
   }
