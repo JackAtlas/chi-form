@@ -28,7 +28,7 @@ function SidebarBtnElement({
       {...draggable.listeners}
       {...draggable.attributes}
     >
-      <Icon size={8} className="text-primary cursor-grab" />
+      <Icon className="size-8 text-primary cursor-grab" />
       <p className="text-xs">{label}</p>
     </Button>
   )
