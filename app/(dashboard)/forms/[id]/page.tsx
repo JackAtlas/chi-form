@@ -130,6 +130,11 @@ async function SubmissionTable({ id }: { id: number }) {
   formElements.forEach((element) => {
     switch (element.type) {
       case 'TextField':
+      case 'NumberField':
+      case 'TextAreaField':
+      case 'DateField':
+      case 'SelectField':
+      case 'CheckboxField':
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -202,21 +207,24 @@ function RowCell({
 }) {
   let node: ReactNode = value
 
-  // switch (type) {
-  //   case 'DateField':
-  //     if (!value) break
-  //     const date = new Date(value)
-  //     node = (
-  //       <Badge variant="outline">{format(date, 'dd/MM/yyyy')}</Badge>
-  //     )
-  //     break
-  //   case 'CheckboxField':
-  //     const checked = value === 'true' ? true : false
-  //     node = <Checkbox checked={checked} disabled />
-  //     break
-  //   default:
-  //     break
-  // }
+  switch (type) {
+    case 'DateField':
+      if (!value) break
+      const date = new Date(value)
+      node = (
+        <Badge variant="outline">{format(date, 'dd/MM/yyyy')}</Badge>
+      )
+      break
+    case 'CheckboxField':
+      const checked = value === 'true' ? true : false
+      node = <Checkbox checked={checked} disabled />
+      break
+    case 'TextAreaField':
+      node = <p className="whitespace-pre-line">{value}</p>
+      break
+    default:
+      break
+  }
 
   return <TableCell>{node}</TableCell>
 }
