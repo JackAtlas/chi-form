@@ -6,7 +6,7 @@ import React from 'react'
 async function SubmitPage({
   params
 }: {
-  params: { formUrl: string }
+  params: Promise<{ formUrl: string }>
 }) {
   const { formUrl } = await params
   const form = await GetFormContentByUrl(formUrl)

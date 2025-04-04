@@ -29,7 +29,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 export default async function FormDetailPage({
   params
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
   const form = await GetFormById(Number(id))

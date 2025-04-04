@@ -5,7 +5,7 @@ import React from 'react'
 export default async function BuilderPage({
   params
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params
   const form = await GetFormById(Number(id))
