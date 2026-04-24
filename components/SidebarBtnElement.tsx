@@ -22,7 +22,7 @@ function SidebarBtnElement({
       ref={draggable.setNodeRef}
       variant="outline"
       className={cn(
-        'flex flex-col gap-2 h-[120px] w-[120px] cursor-grab',
+        'flex flex-col gap-2 h-30 w-30 cursor-grab',
         draggable.isDragging && 'ring-2 ring-primary'
       )}
       {...draggable.listeners}
@@ -43,7 +43,7 @@ export function SidebarBtnElementDragOverlay({
   return (
     <Button
       variant="outline"
-      className="flex flex-col gap-2 h-[120px] w-[120px] cursor-grab"
+      className="flex flex-col gap-2 h-30 w-30 cursor-grab"
     >
       <Icon size={8} className="text-primary cursor-grab" />
       <p className="text-xs">{label}</p>
