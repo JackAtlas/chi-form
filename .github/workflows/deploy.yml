@@ -1,0 +1,73 @@
+name: Deploy to Tencent Cloud
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma Client
+        run: pnpm prisma generate
+
+      - name: Build the project
+        run: pnpm build
+
+      - name: Package files
+        run: |
+          tar -czf release.tar.gz \
+            .next \
+            public \
+            package.json \
+            pnpm-lock.yaml \
+            prisma \
+            prisma.config.ts
+
+      - name: Upload to Server via SSH
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: 'release.tar.gz'
+          target: '/var/www/chi-form'
+
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /var/www/chi-form
+
+            tar -xzf release.tar.gz
+
+            pnpm install --frozen-lockfile
+
+            pnpm prisma generate
+
+            pnpm prisma migrate deploy
+
+            pm2 restart chi-form || pm2 start pnpm --name "chi-form" -- start
+
+            rm release.tar.gz
