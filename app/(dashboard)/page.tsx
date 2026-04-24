@@ -143,7 +143,7 @@ export function StatsCard({
 
 function FormCardSkeleton() {
   return (
-    <Skeleton className="border-2 border-primary/20 h-[200px] w-full" />
+    <Skeleton className="border-2 border-primary/20 h-50 w-full" />
   )
 }
 
@@ -160,7 +160,7 @@ async function FormCards() {
 
 function FormCard({ form }: { form: Form }) {
   return (
-    <Card className="h-[200px] gap-0 justify-between">
+    <Card className="h-50 gap-0 justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 justify-between overflow-x-hidden">
           <span className="truncate font-bold">{form.name}</span>
@@ -187,7 +187,7 @@ function FormCard({ form }: { form: Form }) {
           )}
         </CardDescription>
       </CardHeader>
-      <CardContent className="h-[20px] truncate text-sm text-muted-foreground">
+      <CardContent className="h-5 truncate text-sm text-muted-foreground">
         {form.description || '暂无描述'}
       </CardContent>
       <CardFooter>
