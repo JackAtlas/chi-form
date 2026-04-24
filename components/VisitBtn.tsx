@@ -1,15 +1,13 @@
 'use client'
 
-import React from 'react'
 import { Button } from './ui/button'
 
 function VisitBtn({ shareURL }: { shareURL: string }) {
-  const shareLink = `${window.location.origin}/submit/${shareURL}`
   return (
     <Button
       className="w-50"
       onClick={() => {
-        window.open(shareLink, '_blank')
+        window.open(`/submit/${shareURL}`, '_blank')
       }}
     >
       查看
