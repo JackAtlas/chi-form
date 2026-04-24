@@ -33,7 +33,7 @@ function PublishFormBtn({ id }: { id: number }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="gap-2 text-white bg-gradient-to-r from-violet-400 to-fuchsia-400">
+        <Button className="gap-2 text-white bg-linear-to-r from-violet-400 to-fuchsia-400">
           <ArrowUpToLineIcon size={6} />
           发布
         </Button>

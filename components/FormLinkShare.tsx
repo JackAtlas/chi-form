@@ -9,10 +9,10 @@ import { toast } from 'sonner'
 function FormLinkShare({ shareURL }: { shareURL: string }) {
   const shareLink = `${window.location.origin}/submit/${shareURL}`
   return (
-    <div className="flex flex-grow gap-4 items-center">
+    <div className="flex grow gap-4 items-center">
       <Input value={shareLink} readOnly />
       <Button
-        className="max-w-[250px]"
+        className="max-w-62.5"
         onClick={() => {
           navigator.clipboard.writeText(shareLink)
           toast.info('链接已复制到剪贴板')

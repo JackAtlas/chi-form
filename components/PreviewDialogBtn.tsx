@@ -20,7 +20,7 @@ function PreviewDialogBtn() {
           预览
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-screen h-screen max-h-screen max-w-screen sm:max-w-screen flex flex-col flex-grow p-0 gap-0">
+      <DialogContent className="w-screen h-screen max-h-screen max-w-screen sm:max-w-screen flex flex-col grow p-0 gap-0">
         <div className="px-4 py-2 border-b">
           <DialogTitle className="text-lg font-bold text-muted-foreground">
             表单预览
@@ -29,8 +29,8 @@ function PreviewDialogBtn() {
             您的用户将看到这样的表单
           </p>
         </div>
-        <div className="bg-accent flex flex-col flex-grow items-center justify-center p-4 bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)] overflow-y-auto">
-          <div className="max-w-[620px] flex flex-col gap-4 flex-grow bg-background h-full w-full rounded-2xl p-8 overflow-y-auto">
+        <div className="bg-accent flex flex-col grow items-center justify-center p-4 bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)] overflow-y-auto">
+          <div className="max-w-155 flex flex-col gap-4 grow bg-background h-full w-full rounded-2xl p-8 overflow-y-auto">
             {elements.map((element) => {
               const FormComponent =
                 FormElements[element.type].formComponent

@@ -50,9 +50,8 @@ function Designer() {
 
       if (droppingSidebarBtnOverDesignerDropArea) {
         const type = active.data?.current?.type
-        const newElement = FormElements[
-          type as ElementsType
-        ].construct(idGenerator())
+        const newElement =
+          FormElements[type as ElementsType].construct(idGenerator())
 
         addElement(elements.length, newElement)
         return
@@ -70,9 +69,8 @@ function Designer() {
 
       if (droppingSidebarBtnOverDesignerElement) {
         const type = active.data?.current?.type
-        const newElement = FormElements[
-          type as ElementsType
-        ].construct(idGenerator())
+        const newElement =
+          FormElements[type as ElementsType].construct(idGenerator())
 
         const overId = over.data?.current?.elementId
 
@@ -134,18 +132,18 @@ function Designer() {
         <div
           ref={droppable.setNodeRef}
           className={cn(
-            'bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto',
+            'bg-background max-w-230 h-full m-auto rounded-xl flex flex-col grow items-center justify-start flex-1 overflow-y-auto',
             droppable.isOver && 'ring-4 ring-primary ring-inset'
           )}
         >
           {!droppable.isOver && elements.length === 0 && (
-            <p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
+            <p className="text-3xl text-muted-foreground flex grow items-center font-bold">
               拖到这里
             </p>
           )}
           {droppable.isOver && elements.length === 0 && (
             <div className="p-4 w-full">
-              <div className="h-[120px] rounded-md bg-primary/20"></div>
+              <div className="h-30 rounded-md bg-primary/20"></div>
             </div>
           )}
           {elements.length > 0 && (
@@ -207,7 +205,7 @@ function DesignerElementWrapper({
       ref={draggable.setNodeRef}
       {...draggable.listeners}
       {...draggable.attributes}
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
+      className="relative h-30 flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
       onMouseEnter={() => {
         setMouseIsOver(true)
       }}
@@ -249,18 +247,18 @@ function DesignerElementWrapper({
         </>
       )}
       {topHalf.isOver && (
-        <div className="absolute top-0 w-full rounded-md h-[7px] bg-primary rounded-b-none"></div>
+        <div className="absolute top-0 w-full rounded-md h-1.75 bg-primary rounded-b-none"></div>
       )}
       <div
         className={cn(
-          'flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100',
+          'flex w-full h-30 items-center rounded-md bg-accent/40 px-4 py-2 pointer-events-none opacity-100',
           mouseIsOver && 'opacity-30'
         )}
       >
         <DesignerElement elementInstance={element} />
       </div>
       {bottomHalf.isOver && (
-        <div className="absolute bottom-0 w-full rounded-md h-[7px] bg-primary rounded-t-none"></div>
+        <div className="absolute bottom-0 w-full rounded-md h-1.75 bg-primary rounded-t-none"></div>
       )}
     </div>
   )
