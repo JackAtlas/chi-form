@@ -71,7 +71,7 @@ jobs:
 
             pnpm prisma generate
 
-            pnpm prisma migrate deploy
+            pnpm prisma db push --accept-data-loss
 
             pm2 restart chi-form || pm2 start pnpm --name "chi-form" -- start
 
