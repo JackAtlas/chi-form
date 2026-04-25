@@ -168,7 +168,7 @@ function FormComponent({
               setError(!valid)
               submitValue(element.id, value)
             }}
-            initialFocus
+            autoFocus
           />
         </PopoverContent>
       </Popover>
