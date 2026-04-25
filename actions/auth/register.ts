@@ -1,27 +1,30 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { registerSchema } from '@/schemas/auth'
 import bcrypt from 'bcryptjs'
 
 export async function register(
   formData: FormData
 ): Promise<{ error: string | null }> {
-  const username = formData
-    .get('username')
-    ?.toString()
-    .toLowerCase()
-    .trim()
-  const password = formData.get('password')?.toString().trim()
-  const confirmPassword = formData.get('password')?.toString().trim()
+  const raw = {
+    username: formData.get('username'),
+    password: formData.get('password'),
+    confirmPassword: formData.get('confirmPassword')
+  }
 
-  if (!username || !password || !confirmPassword)
-    return { error: '用户名和密码不能为空' }
+  const parsed = registerSchema.safeParse(raw)
 
-  if (password !== confirmPassword)
-    return { error: '两次输入的密码不一致' }
+  if (!parsed.success) {
+    return {
+      error: parsed.error.issues[0]?.message || '参数错误'
+    }
+  }
+
+  const { username, password } = parsed.data
 
   const existingUser = await prisma.user.findUnique({
-    where: { name: username }
+    where: { name: username.toLowerCase().trim() }
   })
 
   if (existingUser) return { error: '用户名已存在' }
@@ -30,7 +33,7 @@ export async function register(
 
   await prisma.user.create({
     data: {
-      name: username,
+      name: username.toLocaleLowerCase().trim(),
       passwordHash: hashedPassword
     }
   })

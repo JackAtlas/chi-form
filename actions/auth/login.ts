@@ -2,24 +2,30 @@
 
 import { signIn } from '@/auth'
 import prisma from '@/lib/prisma'
+import { loginSchema } from '@/schemas/auth'
 
 export async function login(
   formData: FormData
 ): Promise<{ error: string | null }> {
   try {
-    const username = formData
-      .get('username')
-      ?.toString()
-      .toLowerCase()
-      .trim()
-    const password = formData.get('password')?.toString()
-
-    if (!username || !password) {
-      return { error: '用户名和密码不能为空' }
+    const raw = {
+      username: formData.get('username'),
+      password: formData.get('password')
     }
 
+    const parsed = loginSchema.safeParse(raw)
+
+    if (!parsed.success) {
+      return {
+        error: parsed.error.issues[0]?.message || '参数错误'
+      }
+    }
+
+    const { username, password } = parsed.data
+    const normalizedUsername = username.toLowerCase().trim()
+
     const user = await prisma.user.findUnique({
-      where: { name: username }
+      where: { name: normalizedUsername }
     })
 
     if (!user) {
@@ -27,7 +33,7 @@ export async function login(
     }
 
     await signIn('credentials', {
-      username,
+      username: normalizedUsername,
       password,
       redirect: false
     })
