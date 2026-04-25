@@ -37,7 +37,7 @@ const extraAttributes = {
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   helperText: z.string().max(200),
-  required: z.boolean().default(false)
+  required: z.boolean()
 })
 
 export const CheckboxFieldFormElement: FormElement = {
@@ -175,7 +175,7 @@ function PropertiesComponent({
     defaultValues: {
       label,
       helperText,
-      required
+      required: required ?? false
     }
   })
 
