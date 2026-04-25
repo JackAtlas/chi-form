@@ -67,11 +67,11 @@ export const DateFieldFormElement: FormElement = {
     currentValue: string
   ): boolean => {
     const element = formElement as CustomInstance
-    if (element.extraAttributes.required) {
-      return currentValue.length > 0
-    }
+    if (!element.extraAttributes.required) return true
 
-    return true
+    const date = new Date(currentValue)
+
+    return !isNaN(date.getTime())
   }
 }
 
