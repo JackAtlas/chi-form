@@ -102,7 +102,7 @@ export default function SignUpPage() {
           <div className="mt-6 text-center text-sm text-muted-foreground">
             已经有账号？{' '}
             <Link
-              href="/signIn"
+              href="/login"
               className="font-medium text-primary hover:underline"
             >
               去登录

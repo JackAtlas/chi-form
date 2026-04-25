@@ -89,7 +89,7 @@ export default function SignInPage() {
           <div className="mt-6 text-center text-sm text-muted-foreground">
             还没有账号？{' '}
             <Link
-              href="/signUp"
+              href="/register"
               className="font-medium text-primary hover:underline"
             >
               去注册
