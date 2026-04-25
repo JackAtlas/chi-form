@@ -1,13 +1,13 @@
 'use client'
 
-import React from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { Share2Icon } from 'lucide-react'
 import { toast } from 'sonner'
 
 function FormLinkShare({ shareURL }: { shareURL: string }) {
-  const shareLink = `${window.location.origin}/submit/${shareURL}`
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  const shareLink = `${baseUrl}/submit/${shareURL}`
   return (
     <div className="flex grow gap-4 items-center">
       <Input value={shareLink} readOnly />
