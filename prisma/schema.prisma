@@ -9,12 +9,18 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+}
+
+model User {
+  id String @id @default(cuid())
+  name String @unique
+  passwordHash String
+  forms Form[]
 }
 
 model Form {
   id Int @id @default(autoincrement())
-  userId String
   createdAt DateTime @default(now())
   published Boolean @default(false)
   name String
@@ -24,10 +30,11 @@ model Form {
   visits Int @default(0)
   submissions Int @default(0)
 
+  user User @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userId String
+
   shareURL String @unique @default(uuid())
   FormSubmissions FormSubmissions[]
-
-  @@unique([name, userId])
 }
 
 model FormSubmissions {

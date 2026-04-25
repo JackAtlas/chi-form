@@ -1,7 +1,6 @@
 import Logo from '@/components/Logo'
 import ThemeSwitcher from '@/components/ThemeSwitcher'
-import { UserButton } from '@clerk/nextjs'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 function Layout({ children }: { children: ReactNode }) {
   return (
@@ -10,7 +9,6 @@ function Layout({ children }: { children: ReactNode }) {
         <Logo />
         <div className="flex gap-4 items-center">
           <ThemeSwitcher />
-          <UserButton />
         </div>
       </nav>
       <main className="flex w-full grow">{children}</main>

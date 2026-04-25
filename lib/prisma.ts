@@ -1,10 +1,10 @@
 import 'dotenv/config'
-import { PrismaLibSql } from '@prisma/adapter-libsql'
+import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '@prisma/client'
 
 const connectionString = process.env.DATABASE_URL as string
 
-const adapter = new PrismaLibSql({ url: connectionString })
+const adapter = new PrismaPg({ connectionString })
 
 const prismaClientSingleton = () => new PrismaClient({ adapter })
 

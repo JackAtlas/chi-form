@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
+import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Toaster } from '@/components/ui/sonner'
 import DesignerContextProvider from '@/components/context/DesignerContext'
@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider afterSignOutUrl="/sign-in">
-      <html lang="zh-CN" suppressHydrationWarning>
+    <SessionProvider>
+      <html lang="zh-cmn-Hans" suppressHydrationWarning>
         <body className="antialiased">
           <DesignerContextProvider>
             <ThemeProvider
@@ -31,6 +31,6 @@ export default function RootLayout({
           </DesignerContextProvider>
         </body>
       </html>
-    </ClerkProvider>
+    </SessionProvider>
   )
 }

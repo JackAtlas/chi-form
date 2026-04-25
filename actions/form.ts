@@ -2,12 +2,13 @@
 
 import prisma from '@/lib/prisma'
 import { formSchema, formSchemaType } from '@/schemas/form'
-import { currentUser } from '@clerk/nextjs/server'
+import { auth } from '../auth'
 
 class UserNotFoundErr extends Error {}
 
 export async function GetFormStats() {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -46,7 +47,8 @@ export async function CreateForm(data: formSchemaType) {
     throw new Error(validation.error.message)
   }
 
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -54,7 +56,7 @@ export async function CreateForm(data: formSchemaType) {
   const { name, description } = data
   const form = await prisma.form.create({
     data: {
-      userId: user.id,
+      userId: user.id as string,
       name,
       description
     }
@@ -68,7 +70,8 @@ export async function CreateForm(data: formSchemaType) {
 }
 
 export async function GetForms() {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -84,7 +87,8 @@ export async function GetForms() {
 }
 
 export async function GetFormById(id: number) {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -101,7 +105,8 @@ export async function UpdateFormContent(
   id: number,
   jsonContent: string
 ) {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -118,7 +123,8 @@ export async function UpdateFormContent(
 }
 
 export async function PublishForm(id: number) {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
@@ -170,7 +176,8 @@ export async function SubmitForm(formUrl: string, content: string) {
 }
 
 export async function GetFormWithSubmissions(id: number) {
-  const user = await currentUser()
+  const session = await auth()
+  const user = session?.user
   if (!user) {
     throw new UserNotFoundErr()
   }
