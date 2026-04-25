@@ -1,4 +1,5 @@
 import Logo from '@/components/Logo'
+import LogoutButton from '@/components/LogoutButton'
 import ThemeSwitcher from '@/components/ThemeSwitcher'
 import { ReactNode } from 'react'
 
@@ -9,6 +10,7 @@ function Layout({ children }: { children: ReactNode }) {
         <Logo />
         <div className="flex gap-4 items-center">
           <ThemeSwitcher />
+          <LogoutButton />
         </div>
       </nav>
       <main className="flex w-full grow">{children}</main>
