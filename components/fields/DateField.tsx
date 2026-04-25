@@ -125,6 +125,7 @@ function FormComponent({
     defaultValue ? new Date(defaultValue) : undefined
   )
   const [error, setError] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     setError(isInvalid ? true : false)
@@ -137,7 +138,7 @@ function FormComponent({
         {label}
         {required && '*'}
       </Label>
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
@@ -157,6 +158,7 @@ function FormComponent({
             selected={date}
             onSelect={(date) => {
               setDate(date)
+              setOpen(false)
               if (!submitValue) return
               const value = date?.toUTCString() || ''
               const valid = DateFieldFormElement.validate(
